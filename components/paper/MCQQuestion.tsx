@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -18,8 +17,8 @@ interface MCQQuestionProps {
   questionNumber: number;
   question: string;
   options: MCQOption[];
-  value?: string;
-  onChange?: (value: string) => void;
+  selectedAnswer?: string;
+  onSelect?: (value: string) => void;
   className?: string;
 }
 
@@ -27,15 +26,12 @@ export function MCQQuestion({
   questionNumber,
   question,
   options,
-  value,
-  onChange,
+  selectedAnswer,
+  onSelect,
   className,
 }: MCQQuestionProps) {
-  const [selected, setSelected] = useState(value);
-
   const handleSelect = (optionValue: string) => {
-    setSelected(optionValue);
-    onChange?.(optionValue);
+    onSelect?.(optionValue);
   };
 
   return (
@@ -103,7 +99,7 @@ export function MCQQuestion({
           <MCQOptionItem
             key={option.value}
             label={option.label}
-            selected={selected === option.value}
+            selected={selectedAnswer === option.value}
             onClick={() => handleSelect(option.value)}
           />
         ))}
