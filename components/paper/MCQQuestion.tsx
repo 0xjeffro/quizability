@@ -1,6 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
 import { cn } from "@/lib/utils";
 
 interface MCQOption {
@@ -42,7 +48,47 @@ export function MCQQuestion({
         >
           {questionNumber}.
         </span>
-        <p style={{ color: "var(--paper-text)" }}>{question}</p>
+        <div className="prose prose-sm max-w-none" style={{ color: "var(--paper-text)" }}>
+          <ReactMarkdown
+            remarkPlugins={[remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+            components={{
+              code({ className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                const isInline = !match;
+                return isInline ? (
+                  <code
+                    className="px-1.5 py-0.5 rounded text-[13px] font-mono"
+                    style={{
+                      backgroundColor: "var(--paper-code-bg, rgba(0,0,0,0.05))",
+                    }}
+                    {...props}
+                  >
+                    {children}
+                  </code>
+                ) : (
+                  <SyntaxHighlighter
+                    style={oneLight}
+                    language={match[1]}
+                    PreTag="div"
+                    customStyle={{
+                      margin: "0.75rem 0",
+                      borderRadius: "0.375rem",
+                      fontSize: "13px",
+                    }}
+                  >
+                    {String(children).replace(/\n$/, "")}
+                  </SyntaxHighlighter>
+                );
+              },
+              p({ children }) {
+                return <p className="mb-2 last:mb-0">{children}</p>;
+              },
+            }}
+          >
+            {question}
+          </ReactMarkdown>
+        </div>
       </div>
 
       {/* Options */}
@@ -117,7 +163,30 @@ function MCQOptionItem({ label, selected, onClick }: MCQOptionItemProps) {
       </span>
 
       {/* Option text */}
-      <span style={{ color: "var(--paper-text)" }}>{label}</span>
+      <span style={{ color: "var(--paper-text)" }}>
+        <ReactMarkdown
+          remarkPlugins={[remarkMath]}
+          rehypePlugins={[rehypeKatex]}
+          components={{
+            p({ children }) {
+              return <>{children}</>;
+            },
+            code({ children, ...props }) {
+              return (
+                <code
+                  className="px-1 py-0.5 rounded text-[13px] font-mono"
+                  style={{ backgroundColor: "var(--paper-code-bg, rgba(0,0,0,0.05))" }}
+                  {...props}
+                >
+                  {children}
+                </code>
+              );
+            },
+          }}
+        >
+          {label}
+        </ReactMarkdown>
+      </span>
     </button>
   );
 }
