@@ -46,7 +46,13 @@ export function MCQQuestion({
       </div>
 
       {/* Options */}
-      <div className="flex flex-col gap-2 pl-5">
+      <div
+        className="flex flex-wrap pl-5"
+        style={{
+          flexDirection: "var(--paper-option-direction)" as "row" | "column",
+          gap: "var(--paper-option-gap)",
+        }}
+      >
         {options.map((option) => (
           <MCQOptionItem
             key={option.value}
@@ -71,18 +77,18 @@ function MCQOptionItem({ label, selected, onClick }: MCQOptionItemProps) {
     <button
       type="button"
       onClick={onClick}
-      className={cn(
-        "flex items-center gap-3 px-4 py-3 rounded-md text-left transition-colors cursor-pointer"
-      )}
+      className="flex items-center gap-2 text-left transition-colors cursor-pointer"
       style={{
+        padding: "var(--paper-option-padding)",
         backgroundColor: selected
           ? "var(--paper-option-bg-selected)"
           : "var(--paper-option-bg)",
-        borderWidth: "1px",
+        borderWidth: "var(--paper-option-border-width)",
         borderStyle: "solid",
         borderColor: selected
           ? "var(--paper-option-border-selected)"
           : "var(--paper-option-border)",
+        borderRadius: "var(--paper-option-radius)",
       }}
     >
       {/* Radio indicator */}

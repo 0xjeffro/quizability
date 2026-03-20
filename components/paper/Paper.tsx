@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import "./themes.css";
 
-export type PaperTheme = "paper" | "dark";
+export type PaperTheme = "paper" | "dark" | "compact";
 
 interface PaperProps {
   theme: PaperTheme;

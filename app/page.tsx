@@ -45,26 +45,19 @@ export default function Home() {
               Paper Theme:
             </span>
             <div className="flex gap-1 bg-zinc-100 dark:bg-zinc-700 p-1 rounded-lg">
-              <button
-                onClick={() => setTheme("paper")}
-                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
-                  theme === "paper"
-                    ? "bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white shadow-sm"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-                }`}
-              >
-                Paper
-              </button>
-              <button
-                onClick={() => setTheme("dark")}
-                className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
-                  theme === "dark"
-                    ? "bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white shadow-sm"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
-                }`}
-              >
-                Dark
-              </button>
+              {(["paper", "dark", "compact"] as const).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setTheme(t)}
+                  className={`px-3 py-1.5 text-sm rounded-md transition-colors capitalize ${
+                    theme === t
+                      ? "bg-white dark:bg-zinc-600 text-zinc-900 dark:text-white shadow-sm"
+                      : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                  }`}
+                >
+                  {t}
+                </button>
+              ))}
             </div>
           </div>
         </div>
