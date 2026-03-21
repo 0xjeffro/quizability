@@ -1,1 +1,0 @@
-export { ConfigureAmplify } from "./ConfigureAmplify";
