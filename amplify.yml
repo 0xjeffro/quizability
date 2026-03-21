@@ -4,8 +4,8 @@ frontend:
     preBuild:
       commands:
         - npm install -g pnpm
-        - export NODE_OPTIONS=--max-old-space-size=8192
         - pnpm install
+        - export NODE_OPTIONS=--max-old-space-size=8192
     build:
       commands:
         - pnpm run build
