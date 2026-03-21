@@ -9,10 +9,9 @@ interface PreviewPanelProps {
   zoom: number;
   setZoom: (fn: (z: number) => number) => void;
   quizData: ParsedQuizData;
-  onAnswerSelect?: (sectionIndex: number, questionIndex: number, value: string) => void;
 }
 
-export function PreviewPanel({ theme, setTheme, zoom, setZoom, quizData, onAnswerSelect }: PreviewPanelProps) {
+export function PreviewPanel({ theme, setTheme, zoom, setZoom, quizData }: PreviewPanelProps) {
   return (
     <div
       className="flex-1 flex flex-col overflow-hidden"
@@ -123,12 +122,8 @@ export function PreviewPanel({ theme, setTheme, zoom, setZoom, quizData, onAnswe
                     title={section.title}
                     subtitle={section.subtitle}
                   >
-                    {section.questions.map((q, questionIndex) => (
-                      <MCQQuestion
-                        key={q.questionNumber}
-                        {...q}
-                        onSelect={(value) => onAnswerSelect?.(sectionIndex, questionIndex, value)}
-                      />
+                    {section.questions.map((q) => (
+                      <MCQQuestion key={q.questionNumber} {...q} />
                     ))}
                   </QuestionGroup>
                 ))}

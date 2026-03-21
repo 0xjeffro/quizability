@@ -8,20 +8,36 @@ sections:
       - type: mcq
         question: What is the primary purpose of the \`useEffect\` hook in React?
         options:
-          - A. To manage component state
-          - B. To perform side effects in function components
-          - C. To create reusable components
-          - D. To optimize rendering performance
+          - To manage component state
+          - To perform side effects in function components
+          - To create reusable components
+          - To optimize rendering performance
         answer: B
 
       - type: mcq
         question: Which of the following is NOT a valid way to pass data between React components?
         options:
-          - A. Props
-          - B. Context API
-          - C. Direct DOM manipulation
-          - D. State management libraries
+          - Props
+          - Context API
+          - Direct DOM manipulation
+          - State management libraries
         answer: C
+
+      - type: mcq
+        question: Which statement best describes the difference between controlled and uncontrolled components in React?
+        options:
+          - |
+            Controlled components store their state in the DOM, while uncontrolled components use React state to manage form data
+            \`\`\`javascript
+            const arr = [1, 2, 3, 4, 5];
+            const result = arr.filter(x => x % 2 === 0)
+                              .map(x => x * 2);
+            console.log(result);
+            \`\`\`
+          - Controlled components use React state to manage form data and update via onChange handlers, while uncontrolled components store their state in the DOM and are accessed via refs
+          - There is no difference between controlled and uncontrolled components; they are just different naming conventions
+          - Controlled components are only used for input elements, while uncontrolled components can be used for any type of form element
+        answer: B
 
   - title: 二、代码分析题
     subtitle: 每题 10 分，共 20 分
@@ -37,10 +53,10 @@ sections:
           console.log(result);
           \`\`\`
         options:
-          - A. "[1, 2, 3, 4, 5]"
-          - B. "[2, 4]"
-          - C. "[4, 8]"
-          - D. "[2, 4, 6, 8, 10]"
+          - "[1, 2, 3, 4, 5]"
+          - "[2, 4]"
+          - "[4, 8]"
+          - "[2, 4, 6, 8, 10]"
         answer: C
 
       - type: mcq
@@ -61,10 +77,10 @@ sections:
           }
           \`\`\`
         options:
-          - A. Missing cleanup function in useEffect
-          - B. count is stale due to closure
-          - C. Both A and B
-          - D. The code is correct
+          - Missing cleanup function in useEffect
+          - count is stale due to closure
+          - Both A and B
+          - The code is correct
         answer: C
 
   - title: 三、数学应用题
@@ -74,10 +90,10 @@ sections:
         question: |
           已知函数 $f(x) = x^2 + 2x + 1$，求 $f'(x)$ 的值：
         options:
-          - A. $2x + 2$
-          - B. $2x + 1$
-          - C. $x^2 + 2$
-          - D. $2x$
+          - $2x + 2$
+          - $2x + 1$
+          - $x^2 + 2$
+          - $2x$
         answer: A
 
       - type: mcq
@@ -86,9 +102,9 @@ sections:
 
           $$\\int_{0}^{1} x^2 \\, dx$$
         options:
-          - A. $\\frac{1}{2}$
-          - B. $\\frac{1}{3}$
-          - C. $\\frac{1}{4}$
-          - D. $1$
+          - $\\frac{1}{2}$
+          - $\\frac{1}{3}$
+          - $\\frac{1}{4}$
+          - $1$
         answer: B
 `;

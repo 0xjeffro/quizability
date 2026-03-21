@@ -10,7 +10,7 @@ import {
   PreviewPanel,
 } from "@/components/editor";
 import { defaultQuizContent } from "@/lib/defaultQuiz";
-import { parseQuizContent, updateSelectedAnswer } from "@/lib/quizParser";
+import { parseQuizContent } from "@/lib/quizParser";
 
 export default function Home() {
   const [theme, setTheme] = useState<PaperTheme>("paper");
@@ -66,15 +66,6 @@ export default function Home() {
   // Parse YAML content
   const quizData = useMemo(() => parseQuizContent(content), [content]);
 
-  // Handle answer selection
-  const handleAnswerSelect = useCallback(
-    (sectionIndex: number, questionIndex: number, value: string) => {
-      const newContent = updateSelectedAnswer(content, sectionIndex, questionIndex, value);
-      setContent(newContent);
-    },
-    [content]
-  );
-
   return (
     <div className="h-screen flex flex-col bg-[#f5f5f5]">
       <TopMenuBar fileName="react-fundamentals.yaml" />
@@ -100,7 +91,6 @@ export default function Home() {
           zoom={zoom}
           setZoom={setZoom}
           quizData={quizData}
-          onAnswerSelect={handleAnswerSelect}
         />
       </div>
     </div>

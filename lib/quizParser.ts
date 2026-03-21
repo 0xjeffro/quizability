@@ -1,34 +1,10 @@
 import yaml from "js-yaml";
 
-export function updateSelectedAnswer(
-  content: string,
-  sectionIndex: number,
-  questionIndex: number,
-  selectedAnswer: string
-): string {
-  try {
-    const parsed = yaml.load(content) as RawQuizData;
-    if (parsed?.sections?.[sectionIndex]?.questions?.[questionIndex]) {
-      parsed.sections[sectionIndex].questions[questionIndex].selected_answer = selectedAnswer.toUpperCase();
-      return yaml.dump(parsed, {
-        indent: 2,
-        lineWidth: -1,
-        quotingType: '"',
-        forceQuotes: false,
-      });
-    }
-    return content;
-  } catch {
-    return content;
-  }
-}
-
 export interface QuizQuestion {
   type: "mcq" | "fill_blank" | "short_answer";
   question: string;
   options?: string[];
   answer: string;
-  selected_answer?: string;
   explanation?: string;
 }
 
@@ -48,9 +24,8 @@ export interface ParsedQuestion {
   questionNumber: number;
   question: string;
   type: string;
-  options: { label: string; value: string }[];
+  options: string[];
   answer: string;
-  selectedAnswer: string;
   explanation: string;
 }
 
@@ -76,16 +51,8 @@ export function parseQuizContent(content: string): ParsedQuizData {
       questionNumber: questionCounter,
       question: q.question || "",
       type: q.type || "mcq",
-      options: (q.options || []).map((opt) => {
-        const optStr = String(opt);
-        const match = optStr.match(/^([A-Z])\.\s*(.+)/);
-        return {
-          label: optStr,
-          value: match ? match[1].toLowerCase() : optStr,
-        };
-      }),
-      answer: String(q.answer || "").toLowerCase(),
-      selectedAnswer: q.selected_answer ? String(q.selected_answer).toLowerCase() : "",
+      options: (q.options || []).map((opt) => String(opt)),
+      answer: String(q.answer || "").toUpperCase(),
       explanation: q.explanation || "",
     };
   };

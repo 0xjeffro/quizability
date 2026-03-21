@@ -49,17 +49,17 @@
   /* MCQ Option styles */
   --paper-option-bg: rgba(255, 255, 255, 0.03);
   --paper-option-bg-hover: rgba(255, 255, 255, 0.08);
-  --paper-option-bg-selected: rgba(83, 74, 183, 0.2);
+  --paper-option-bg-selected: rgba(74, 139, 141, 0.15);
   --paper-option-border: rgba(255, 255, 255, 0.1);
-  --paper-option-border-selected: #534AB7;
+  --paper-option-border-selected: #4A8B8D;
   --paper-option-border-width: 1px;
   --paper-option-radius: 0.375rem;
 
   /* Radio indicator */
   --paper-radio-size: 18px;
   --paper-radio-border: #666666;
-  --paper-radio-border-selected: #534AB7;
-  --paper-radio-fill: #534AB7;
+  --paper-radio-border-selected: #4A8B8D;
+  --paper-radio-fill: #4A8B8D;
 }
 
 [data-paper-theme="compact"] {
