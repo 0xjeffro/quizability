@@ -7,7 +7,6 @@ frontend:
         - pnpm install
     build:
       commands:
-        - export NODE_OPTIONS=--max-old-space-size=12288
         - pnpm run build
   artifacts:
     baseDirectory: .next
@@ -16,4 +15,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-      - .next/cache/**/*
